@@ -4,21 +4,30 @@ This repository contains a static webpage for the SA Roadmap project, hosted on 
 
 ## Description
 
-An updated roadmap for becoming a System Analyst, based on analysis of Yandex Practicum course materials, professional standards, and links to various resources (Habr articles, roadmaps, courses).
+An expanded and dynamic roadmap for becoming a System Analyst. The site features interactive collapsible sections covering all aspects of the profession: introduction, basic knowledge, technical skills, analysis processes, tools, soft skills, and career development. Based on analysis of Yandex Practicum course materials, professional standards, and various resources (Habr articles, roadmaps, courses).
 
-## Technologies
+## Features
 
-- HTML
-- CSS
-- JavaScript (if needed)
+- Interactive roadmap with 7 main phases
+- Collapsible sections for detailed subtopics
+- Modern UI with gradients and animations
+- Responsive design
 
 ## Roadmap Phases
 
-1. **Основы IT и Бизнеса**: IT basics, business processes.
-2. **Технические Навыки**: SQL, databases, UML, BPMN.
-3. **Сбор и Анализ Требований**: Elicitation, documentation.
-4. **Инструменты и Практика**: Jira, Confluence, testing, Agile.
-5. **Софт-скиллы и Карьера**: Communication, project management, certifications.
+1. **Введение в Профессию** (Beginner): Basics of system analysis
+2. **Базовые Знания** (Beginner): IT and business fundamentals
+3. **Технические Навыки** (Intermediate): SQL, modeling, architecture
+4. **Процессы Анализа** (Intermediate): Requirements gathering and documentation
+5. **Инструменты и Практика** (Intermediate): Tools like Jira, Confluence, Agile
+6. **Soft Skills и Коммуникация** (Advanced): Communication and leadership
+7. **Карьера и Сертификации** (Advanced): Career paths and certifications
+
+## Technologies
+
+- HTML5
+- CSS3 (with animations and responsive design)
+- JavaScript (for interactivity)
 
 ## Deployment
 
