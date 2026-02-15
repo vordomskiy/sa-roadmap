@@ -8,12 +8,12 @@ An expanded and dynamic roadmap for becoming a System Analyst. The site features
 
 ## Features
 
-- Minimalistic bento grid layout with clean blocks
-- Expandable subtopics on click
-- Neutral gray palette with subtle pastel accents
-- Simple sans-serif font for readability
-- Responsive design for all devices
-- Subtle hover animations for smooth transitions
+- Detailed, structured roadmap with 7 phases and subtopics
+- Interactive elements: expandable sections, progress tracking with checkboxes
+- Estimated time and resource links for each subtopic (based on Habr, Practicum, Systems.education, etc.)
+- Minimalistic bento grid layout with subtle animations
+- Local storage for progress persistence
+- Responsive design
 
 ## Roadmap Phases
 
