@@ -235,3 +235,6 @@ Thumbs.db
 # Build artifacts
 build/
 dist/
+
+# Local materials folder
+materials/
