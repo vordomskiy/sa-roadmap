@@ -8,8 +8,9 @@ An expanded and dynamic roadmap for becoming a System Analyst. The site features
 
 ## Features
 
-- Interactive roadmap with 7 main phases
-- Collapsible sections for detailed subtopics
+- Interactive mind map with clickable nodes
+- Expandable subtopics for each phase
+- Visual connections with arrows
 - Modern UI with gradients and animations
 - Responsive design
 

@@ -11,187 +11,171 @@
             padding: 20px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
-            line-height: 1.6;
+            overflow-x: auto;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
+            position: relative;
         }
-        h1 {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        .intro {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 1.2em;
-        }
-        .roadmap {
-            list-style-type: none;
-            padding: 0;
-        }
-        .roadmap li {
-            margin: 20px 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .roadmap li:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        .phase {
-            font-size: 1.5em;
-            font-weight: bold;
-            padding: 15px 20px;
-            background: rgba(0, 123, 255, 0.8);
-            cursor: pointer;
+        .node {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1;
         }
-        .phase::after {
-            content: '▼';
-            transition: transform 0.3s;
+        .node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
-        .roadmap li.active .phase::after {
-            transform: rotate(180deg);
+        .node.center {
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff6b6b;
+            color: white;
         }
-        .content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            padding: 0 20px;
+        .node.phase1 { top: 250px; left: 10%; }
+        .node.phase2 { top: 250px; left: 25%; }
+        .node.phase3 { top: 250px; left: 40%; }
+        .node.phase4 { top: 250px; left: 55%; }
+        .node.phase5 { top: 250px; left: 70%; }
+        .node.phase6 { top: 450px; left: 30%; }
+        .node.phase7 { top: 450px; left: 60%; }
+
+        .subnodes {
+            display: none;
+            position: absolute;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        .roadmap li.active .content {
-            max-height: 1000px;
-            padding: 20px;
+        .subnodes li {
+            background: rgba(0, 123, 255, 0.8);
+            color: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            width: 150px;
+            text-align: center;
+            font-size: 0.9em;
         }
-        .subtopics {
-            list-style-type: disc;
-            margin-left: 20px;
+
+        .arrow {
+            position: absolute;
+            width: 2px;
+            background: #fff;
+            z-index: 0;
         }
-        .subtopics li {
-            margin: 10px 0;
-        }
+        .arrow.v { height: 100px; top: 170px; }
+        .arrow.v.left { left: calc(50% - 1px); transform: translateX(-50%); }
+        .arrow.h { height: 2px; top: 320px; width: 80%; left: 10%; }
+
         .level {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            margin-left: 10px;
+            display: block;
+            font-size: 0.7em;
+            margin-top: 5px;
         }
-        .beginner { background: #28a745; }
-        .intermediate { background: #ffc107; color: #000; }
-        .advanced { background: #dc3545; }
+        .beginner { background: #28a745 !important; }
+        .intermediate { background: #ffc107 !important; color: #000 !important; }
+        .advanced { background: #dc3545 !important; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Дорожная Карта Системного Аналитика</h1>
-        <div class="intro">
-            <p>Полная и актуальная дорожная карта для становления системным аналитиком. Охватывает все аспекты профессии: от базовых знаний до продвинутых навыков и карьерного роста.</p>
+        <div class="arrow v left"></div>
+        <div class="arrow h"></div>
+
+        <div class="node center" onclick="toggleSub(this, 'center')">Дорожная Карта Системного Аналитика</div>
+
+        <div class="node phase1" onclick="toggleSub(this, 'phase1')">Введение в Профессию <span class="level beginner">Начальный</span>
+            <ul class="subnodes" id="phase1">
+                <li>Что такое системный анализ?</li>
+                <li>Роли и обязанности</li>
+                <li>Разница с бизнес-аналитиком</li>
+                <li>Курс Яндекс Практикум</li>
+            </ul>
         </div>
-        <ul class="roadmap">
-            <li>
-                <div class="phase" onclick="toggle(this)">Введение в Профессию <span class="level beginner">Начальный</span></div>
-                <div class="content">
-                    <p>Познакомьтесь с ролью системного аналитика в IT-проектах.</p>
-                    <ul class="subtopics">
-                        <li>Что такое системный анализ?</li>
-                        <li>Роли и обязанности аналитика</li>
-                        <li>Разница между бизнес- и системным аналитиком</li>
-                        <li>Курс Яндекс Практикум: Введение</li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="phase" onclick="toggle(this)">Базовые Знания <span class="level beginner">Начальный</span></div>
-                <div class="content">
-                    <p>Основа для понимания IT и бизнеса.</p>
-                    <ul class="subtopics">
-                        <li>Основы информационных технологий (компьютеры, сети, ОС)</li>
-                        <li>Бизнес-процессы и их оптимизация</li>
-                        <li>Введение в аналитику данных</li>
-                        <li>Профстандарт 06.022 Системный аналитик</li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="phase" onclick="toggle(this)">Технические Навыки <span class="level intermediate">Средний</span></div>
-                <div class="content">
-                    <p>Необходимые технические компетенции.</p>
-                    <ul class="subtopics">
-                        <li>SQL и работа с базами данных (MySQL, PostgreSQL)</li>
-                        <li>Моделирование: UML, BPMN, ER-диаграммы</li>
-                        <li>Архитектура систем и микросервисы</li>
-                        <li>API и интеграции</li>
-                        <li>Основы программирования (Python, JavaScript)</li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="phase" onclick="toggle(this)">Процессы Анализа <span class="level intermediate">Средний</span></div>
-                <div class="content">
-                    <p>Методы сбора и анализа требований.</p>
-                    <ul class="subtopics">
-                        <li>Сбор требований (elicitation): интервью, опросы, наблюдение</li>
-                        <li>Документация: SRS, use cases, user stories</li>
-                        <li>Прототипирование и валидация</li>
-                        <li>Управление изменениями и версиями</li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="phase" onclick="toggle(this)">Инструменты и Практика <span class="level intermediate">Средний</span></div>
-                <div class="content">
-                    <p>Инструменты для эффективной работы.</p>
-                    <ul class="subtopics">
-                        <li>Управление задачами: Jira, Trello</li>
-                        <li>Документация: Confluence, Miro, Visio</li>
-                        <li>Тестирование: виды, QA-процессы</li>
-                        <li>Методологии: Agile (Scrum, Kanban), Waterfall</li>
-                        <li>Инструменты моделирования: Draw.io, Enterprise Architect</li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="phase" onclick="toggle(this)">Soft Skills и Коммуникация <span class="level advanced">Продвинутый</span></div>
-                <div class="content">
-                    <p>Немеханические навыки для успеха.</p>
-                    <ul class="subtopics">
-                        <li>Коммуникация с stakeholders</li>
-                        <li>Презентация идей</li>
-                        <li>Управление конфликтами</li>
-                        <li>Лидерство и менторство</li>
-                        <li>Эмоциональный интеллект</li>
-                    </ul>
-                </div>
-            </li>
-            <li>
-                <div class="phase" onclick="toggle(this)">Карьера и Сертификации <span class="level advanced">Продвинутый</span></div>
-                <div class="content">
-                    <p>Пути развития и подтверждения квалификации.</p>
-                    <ul class="subtopics">
-                        <li>Уровни: Junior, Middle, Senior, Lead</li>
-                        <li>Сертификации: CBAP, PMI-PBA, IREB</li>
-                        <li>Рынок труда: зарплаты, вакансии</li>
-                        <li>Непрерывное обучение и тренды (AI, Big Data)</li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
+
+        <div class="node phase2" onclick="toggleSub(this, 'phase2')">Базовые Знания <span class="level beginner">Начальный</span>
+            <ul class="subnodes" id="phase2">
+                <li>Основы IT</li>
+                <li>Бизнес-процессы</li>
+                <li>Аналитика данных</li>
+                <li>Профстандарт</li>
+            </ul>
+        </div>
+
+        <div class="node phase3" onclick="toggleSub(this, 'phase3')">Технические Навыки <span class="level intermediate">Средний</span>
+            <ul class="subnodes" id="phase3">
+                <li>SQL и БД</li>
+                <li>Моделирование (UML, BPMN)</li>
+                <li>Архитектура систем</li>
+                <li>API и интеграции</li>
+                <li>Программирование</li>
+            </ul>
+        </div>
+
+        <div class="node phase4" onclick="toggleSub(this, 'phase4')">Процессы Анализа <span class="level intermediate">Средний</span>
+            <ul class="subnodes" id="phase4">
+                <li>Сбор требований</li>
+                <li>Документация</li>
+                <li>Прототипирование</li>
+                <li>Управление изменениями</li>
+            </ul>
+        </div>
+
+        <div class="node phase5" onclick="toggleSub(this, 'phase5')">Инструменты и Практика <span class="level intermediate">Средний</span>
+            <ul class="subnodes" id="phase5">
+                <li>Управление задачами</li>
+                <li>Документация</li>
+                <li>Тестирование</li>
+                <li>Методологии Agile</li>
+                <li>Инструменты моделирования</li>
+            </ul>
+        </div>
+
+        <div class="node phase6" onclick="toggleSub(this, 'phase6')">Soft Skills <span class="level advanced">Продвинутый</span>
+            <ul class="subnodes" id="phase6">
+                <li>Коммуникация</li>
+                <li>Презентация</li>
+                <li>Управление конфликтами</li>
+                <li>Лидерство</li>
+                <li>Эмоциональный интеллект</li>
+            </ul>
+        </div>
+
+        <div class="node phase7" onclick="toggleSub(this, 'phase7')">Карьера <span class="level advanced">Продвинутый</span>
+            <ul class="subnodes" id="phase7">
+                <li>Уровни квалификации</li>
+                <li>Сертификации</li>
+                <li>Рынок труда</li>
+                <li>Тренды</li>
+            </ul>
+        </div>
     </div>
     <script>
-        function toggle(element) {
-            const li = element.parentElement;
-            li.classList.toggle('active');
+        function toggleSub(element, id) {
+            const sub = document.getElementById(id);
+            if (sub.style.display === 'block') {
+                sub.style.display = 'none';
+            } else {
+                sub.style.display = 'block';
+            }
         }
     </script>
 </body>
