@@ -8,11 +8,12 @@ An expanded and dynamic roadmap for becoming a System Analyst. The site features
 
 ## Features
 
-- Interactive mind map with clickable nodes
-- Expandable subtopics for each phase
-- Visual connections with arrows
-- Modern UI with gradients and animations
-- Responsive design
+- Minimalistic bento grid layout with clean blocks
+- Expandable subtopics on click
+- Neutral gray palette with subtle pastel accents
+- Simple sans-serif font for readability
+- Responsive design for all devices
+- Subtle hover animations for smooth transitions
 
 ## Roadmap Phases
 

@@ -6,175 +6,170 @@
     <title>Дорожная Карта Системного Аналитика</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-            overflow-x: auto;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
         }
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            position: relative;
+            display: grid;
+            grid-template-areas:
+                "center center center center center center center"
+                "phase1 phase2 phase3 phase4 phase5 phase6 phase7"
+                "sub sub sub sub sub sub sub";
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: auto auto auto;
+            gap: 20px;
         }
-        .node {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .block {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
+        }
+        .block:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        .center {
+            grid-area: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            background: #d1ecf1;
+        }
+        .phase {
+            font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1;
+            background: #f8f9fa;
         }
-        .node:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        .node.center {
-            top: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff6b6b;
-            color: white;
-        }
-        .node.phase1 { top: 250px; left: 10%; }
-        .node.phase2 { top: 250px; left: 25%; }
-        .node.phase3 { top: 250px; left: 40%; }
-        .node.phase4 { top: 250px; left: 55%; }
-        .node.phase5 { top: 250px; left: 70%; }
-        .node.phase6 { top: 450px; left: 30%; }
-        .node.phase7 { top: 450px; left: 60%; }
+        .phase1 { grid-area: phase1; }
+        .phase2 { grid-area: phase2; }
+        .phase3 { grid-area: phase3; }
+        .phase4 { grid-area: phase4; }
+        .phase5 { grid-area: phase5; }
+        .phase6 { grid-area: phase6; }
+        .phase7 { grid-area: phase7; }
 
-        .subnodes {
-            display: none;
-            position: absolute;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            top: 140px;
-            left: 50%;
-            transform: translateX(-50%);
+        .sub {
+            grid-area: sub;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease, max-height 0.3s ease;
         }
-        .subnodes li {
-            background: rgba(0, 123, 255, 0.8);
-            color: white;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            width: 150px;
-            text-align: center;
+        .sub.active {
+            opacity: 1;
+            max-height: 1000px;
+        }
+        .subtopic {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
             font-size: 0.9em;
+            text-align: left;
         }
-
-        .arrow {
-            position: absolute;
-            width: 2px;
-            background: #fff;
-            z-index: 0;
-        }
-        .arrow.v { height: 100px; top: 170px; }
-        .arrow.v.left { left: calc(50% - 1px); transform: translateX(-50%); }
-        .arrow.h { height: 2px; top: 320px; width: 80%; left: 10%; }
-
         .level {
             display: block;
-            font-size: 0.7em;
+            font-size: 0.8em;
+            color: #666;
             margin-top: 5px;
         }
-        .beginner { background: #28a745 !important; }
-        .intermediate { background: #ffc107 !important; color: #000 !important; }
-        .advanced { background: #dc3545 !important; }
+        .beginner { background: #d4edda !important; }
+        .intermediate { background: #fff3cd !important; }
+        .advanced { background: #f8d7da !important; }
+        @media (max-width: 768px) {
+            .container {
+                grid-template-areas:
+                    "center"
+                    "phase1"
+                    "phase2"
+                    "phase3"
+                    "phase4"
+                    "phase5"
+                    "phase6"
+                    "phase7"
+                    "sub";
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="arrow v left"></div>
-        <div class="arrow h"></div>
+        <div class="block center">Дорожная Карта Системного Аналитика</div>
 
-        <div class="node center" onclick="toggleSub(this, 'center')">Дорожная Карта Системного Аналитика</div>
+        <div class="block phase phase1" onclick="toggleSub('sub1')">Введение в Профессию <span class="level beginner">Начальный</span></div>
+        <div class="block phase phase2" onclick="toggleSub('sub2')">Базовые Знания <span class="level beginner">Начальный</span></div>
+        <div class="block phase phase3" onclick="toggleSub('sub3')">Технические Навыки <span class="level intermediate">Средний</span></div>
+        <div class="block phase phase4" onclick="toggleSub('sub4')">Процессы Анализа <span class="level intermediate">Средний</span></div>
+        <div class="block phase phase5" onclick="toggleSub('sub5')">Инструменты и Практика <span class="level intermediate">Средний</span></div>
+        <div class="block phase phase6" onclick="toggleSub('sub6')">Soft Skills <span class="level advanced">Продвинутый</span></div>
+        <div class="block phase phase7" onclick="toggleSub('sub7')">Карьера <span class="level advanced">Продвинутый</span></div>
 
-        <div class="node phase1" onclick="toggleSub(this, 'phase1')">Введение в Профессию <span class="level beginner">Начальный</span>
-            <ul class="subnodes" id="phase1">
-                <li>Что такое системный анализ?</li>
-                <li>Роли и обязанности</li>
-                <li>Разница с бизнес-аналитиком</li>
-                <li>Курс Яндекс Практикум</li>
-            </ul>
+        <div class="sub" id="sub1">
+            <div class="subtopic">Что такое системный анализ?</div>
+            <div class="subtopic">Роли и обязанности</div>
+            <div class="subtopic">Разница с бизнес-аналитиком</div>
+            <div class="subtopic">Курс Яндекс Практикум</div>
         </div>
-
-        <div class="node phase2" onclick="toggleSub(this, 'phase2')">Базовые Знания <span class="level beginner">Начальный</span>
-            <ul class="subnodes" id="phase2">
-                <li>Основы IT</li>
-                <li>Бизнес-процессы</li>
-                <li>Аналитика данных</li>
-                <li>Профстандарт</li>
-            </ul>
+        <div class="sub" id="sub2">
+            <div class="subtopic">Основы IT</div>
+            <div class="subtopic">Бизнес-процессы</div>
+            <div class="subtopic">Аналитика данных</div>
+            <div class="subtopic">Профстандарт</div>
         </div>
-
-        <div class="node phase3" onclick="toggleSub(this, 'phase3')">Технические Навыки <span class="level intermediate">Средний</span>
-            <ul class="subnodes" id="phase3">
-                <li>SQL и БД</li>
-                <li>Моделирование (UML, BPMN)</li>
-                <li>Архитектура систем</li>
-                <li>API и интеграции</li>
-                <li>Программирование</li>
-            </ul>
+        <div class="sub" id="sub3">
+            <div class="subtopic">SQL и БД</div>
+            <div class="subtopic">Моделирование (UML, BPMN)</div>
+            <div class="subtopic">Архитектура систем</div>
+            <div class="subtopic">API и интеграции</div>
+            <div class="subtopic">Программирование</div>
         </div>
-
-        <div class="node phase4" onclick="toggleSub(this, 'phase4')">Процессы Анализа <span class="level intermediate">Средний</span>
-            <ul class="subnodes" id="phase4">
-                <li>Сбор требований</li>
-                <li>Документация</li>
-                <li>Прототипирование</li>
-                <li>Управление изменениями</li>
-            </ul>
+        <div class="sub" id="sub4">
+            <div class="subtopic">Сбор требований</div>
+            <div class="subtopic">Документация</div>
+            <div class="subtopic">Прототипирование</div>
+            <div class="subtopic">Управление изменениями</div>
         </div>
-
-        <div class="node phase5" onclick="toggleSub(this, 'phase5')">Инструменты и Практика <span class="level intermediate">Средний</span>
-            <ul class="subnodes" id="phase5">
-                <li>Управление задачами</li>
-                <li>Документация</li>
-                <li>Тестирование</li>
-                <li>Методологии Agile</li>
-                <li>Инструменты моделирования</li>
-            </ul>
+        <div class="sub" id="sub5">
+            <div class="subtopic">Управление задачами</div>
+            <div class="subtopic">Документация</div>
+            <div class="subtopic">Тестирование</div>
+            <div class="subtopic">Методологии Agile</div>
+            <div class="subtopic">Инструменты моделирования</div>
         </div>
-
-        <div class="node phase6" onclick="toggleSub(this, 'phase6')">Soft Skills <span class="level advanced">Продвинутый</span>
-            <ul class="subnodes" id="phase6">
-                <li>Коммуникация</li>
-                <li>Презентация</li>
-                <li>Управление конфликтами</li>
-                <li>Лидерство</li>
-                <li>Эмоциональный интеллект</li>
-            </ul>
+        <div class="sub" id="sub6">
+            <div class="subtopic">Коммуникация</div>
+            <div class="subtopic">Презентация</div>
+            <div class="subtopic">Управление конфликтами</div>
+            <div class="subtopic">Лидерство</div>
+            <div class="subtopic">Эмоциональный интеллект</div>
         </div>
-
-        <div class="node phase7" onclick="toggleSub(this, 'phase7')">Карьера <span class="level advanced">Продвинутый</span>
-            <ul class="subnodes" id="phase7">
-                <li>Уровни квалификации</li>
-                <li>Сертификации</li>
-                <li>Рынок труда</li>
-                <li>Тренды</li>
-            </ul>
+        <div class="sub" id="sub7">
+            <div class="subtopic">Уровни квалификации</div>
+            <div class="subtopic">Сертификации</div>
+            <div class="subtopic">Рынок труда</div>
+            <div class="subtopic">Тренды</div>
         </div>
     </div>
     <script>
-        function toggleSub(element, id) {
-            const sub = document.getElementById(id);
-            if (sub.style.display === 'block') {
-                sub.style.display = 'none';
-            } else {
-                sub.style.display = 'block';
+        function toggleSub(id) {
+            const subs = document.querySelectorAll('.sub');
+            subs.forEach(sub => sub.classList.remove('active'));
+            const target = document.getElementById(id);
+            if (target) {
+                target.classList.add('active');
             }
         }
     </script>
